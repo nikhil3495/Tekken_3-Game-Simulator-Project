@@ -59,7 +59,7 @@ Each character features unique balance stats, special visual indicators, and dis
 ## 🚀 How to Play
 
 ### 📥 Option A: Direct Download (Windows Portable - No Install Required)
-1. Download **[Tekken_3_Game.zip](https://github.com/nikhil3495/tekken-3-game/releases/download/v1.0.0/Tekken_3_Game.zip)** from the GitHub Releases.
+1. Download **[Tekken_3_Game.zip](https://github.com/nikhil3495/Tekken_3-Game-Simulator-Project/releases/download/v1.0.0/Tekken_3_Game.zip)** from the GitHub Releases.
 2. Extract the downloaded ZIP file to any folder on your computer.
 3. Open the extracted folder, find **`Tekken 3 Game.exe`**, and run it to play immediately!
 
@@ -70,8 +70,8 @@ Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 
 1. Clone the repository and navigate to the project folder:
    ```bash
-   git clone https://github.com/nikhil3495/tekken-3-game.git
-   cd tekken-3-game
+   git clone https://github.com/nikhil3495/Tekken_3-Game-Simulator-Project.git
+   cd Tekken_3-Game-Simulator-Project
    ```
 2. Install dependencies:
    ```bash
