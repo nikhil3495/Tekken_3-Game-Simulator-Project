@@ -1,0 +1,15 @@
+{
+  "name": "tekken-3-game",
+  "version": "1.0.0",
+  "description": "Tekken 3 Inspired Fighting Game",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-packager . \"Tekken 3 Game\" --platform=win32 --arch=x64 --out=dist --overwrite"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-packager": "^17.1.2"
+  }
+}

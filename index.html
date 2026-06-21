@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tekken 3 Inspired Fighting Game</title>
+  <link rel="stylesheet" href="game.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="game-container">
+    <!-- Game Canvas -->
+    <canvas id="gameCanvas" width="1280" height="720"></canvas>
+
+    <!-- UI Overlay Panels -->
+
+    <!-- Main Menu Screen -->
+    <div id="main-menu" class="screen active">
+      <div class="menu-content">
+        <h1 class="game-title">IRON FIST</h1>
+        <h2 class="game-subtitle">TOURNAMENT 3D</h2>
+        <div class="menu-options">
+          <button class="menu-btn" data-mode="cpu">VS CPU (ARCADE)</button>
+          <button class="menu-btn" data-mode="vs">VS HUMAN (LOCAL)</button>
+          <button class="menu-btn" data-mode="training">TRAINING MODE</button>
+          <button class="menu-btn" id="instructions-btn">CONTROLS & MOVES</button>
+        </div>
+      </div>
+      <div class="footer-credits">Tekken 3 Inspired Fighting Game - Antigravity Engine</div>
+    </div>
+
+    <!-- Character Selection Screen -->
+    <div id="character-select" class="screen">
+      <div class="select-header">
+        <div class="title-text">SELECT YOUR FIGHTER</div>
+        <div class="match-mode-tag">VS CPU</div>
+      </div>
+      
+      <div class="select-layout">
+        <!-- Player 1 Preview -->
+        <div class="player-preview" id="p1-preview">
+          <div class="preview-name">JIN KAZAMA</div>
+          <div class="preview-stance">BALANCED SPEEDS</div>
+          <div class="preview-style">Style: Karate</div>
+          <div class="preview-moves-short">Special: QCF+Punch (Electric Fist)<br>Ultimate: QCB+Kick (Rage Drive)</div>
+        </div>
+
+        <!-- Grid of Characters -->
+        <div class="character-grid-container">
+          <div class="character-grid">
+            <div class="char-card active" data-char="jin">
+              <div class="char-portrait jin"></div>
+              <div class="char-name">JIN</div>
+            </div>
+            <div class="char-card" data-char="king">
+              <div class="char-portrait king"></div>
+              <div class="char-name">KING</div>
+            </div>
+            <div class="char-card" data-char="paul">
+              <div class="char-portrait paul"></div>
+              <div class="char-name">PAUL</div>
+            </div>
+            <div class="char-card" data-char="ogre">
+              <div class="char-portrait ogre"></div>
+              <div class="char-name">OGRE</div>
+            </div>
+          </div>
+          
+          <div class="selection-status">
+            Press <span class="key-hint">SPACE</span> or <span class="key-hint">CLICK</span> to Confirm
+          </div>
+        </div>
+
+        <!-- Player 2 Preview -->
+        <div class="player-preview" id="p2-preview">
+          <div class="preview-name">KING</div>
+          <div class="preview-stance">POWER WRESTLER</div>
+          <div class="preview-style">Style: Wrestling</div>
+          <div class="preview-moves-short">Special: D,DF,F+Punch (Giant Swing)<br>Ultimate: QCB+Punch (Tombstone)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions Overlay -->
+    <div id="instructions-modal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>CONTROLS & MOVES LIST</h2>
+        
+        <div class="instructions-columns">
+          <div class="inst-col">
+            <h3>Player 1 Controls</h3>
+            <ul>
+              <li><strong>Walk Left / Right:</strong> A / D</li>
+              <li><strong>Jump / Crouch:</strong> W / S</li>
+              <li><strong>Punch:</strong> J</li>
+              <li><strong>Kick:</strong> K</li>
+              <li><strong>Special Move:</strong> U</li>
+              <li><strong>Ultimate (Needs Rage):</strong> I</li>
+              <li><strong>Auto-Block:</strong> Hold Backward (A while facing right)</li>
+            </ul>
+          </div>
+          <div class="inst-col">
+            <h3>Player 2 Controls (Local VS)</h3>
+            <ul>
+              <li><strong>Walk Left / Right:</strong> Arrow Left / Right</li>
+              <li><strong>Jump / Crouch:</strong> Arrow Up / Down</li>
+              <li><strong>Punch:</strong> Numpad 1</li>
+              <li><strong>Kick:</strong> Numpad 2</li>
+              <li><strong>Special Move:</strong> Numpad 4</li>
+              <li><strong>Ultimate (Needs Rage):</strong> Numpad 5</li>
+              <li><strong>Auto-Block:</strong> Hold Backward (Arrow Key opposite to face)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="moves-list-table">
+          <h3>FIGHTER SPECIAL MOVES</h3>
+          <div class="moves-grid">
+            <div class="move-row"><strong>JIN KAZAMA:</strong> Electric Fist (U) | Rage Drive (I)</div>
+            <div class="move-row"><strong>KING:</strong> Giant Swing (U) | Tombstone Piledriver (I)</div>
+            <div class="move-row"><strong>PAUL PHOENIX:</strong> Deathfist (U) | Rage Phoenix (I)</div>
+            <div class="move-row"><strong>OGRE:</strong> Fire Breath (U) | Ancient Apocalypse (I)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUD Overlay (Visible during gameplay) -->
+    <div id="gameplay-hud" class="hud-overlay">
+      <div class="hud-header">
+        <!-- Player 1 Status -->
+        <div class="hud-player p1">
+          <div class="player-info">
+            <div class="name">JIN</div>
+            <div class="rage-bar-container"><div class="rage-bar" id="p1-rage">RAGE ACTIVE</div></div>
+          </div>
+          <div class="health-bar-bg">
+            <div class="health-bar" id="p1-health" style="width: 100%;"></div>
+            <div class="health-bar-red-drain" id="p1-health-drain" style="width: 100%;"></div>
+          </div>
+          <div class="round-badges" id="p1-rounds">
+            <!-- Dynamic badges: <span class="badge active"></span> -->
+          </div>
+        </div>
+
+        <!-- Timer -->
+        <div class="hud-timer">
+          <div class="timer-value" id="round-timer">99</div>
+        </div>
+
+        <!-- Player 2 Status -->
+        <div class="hud-player p2">
+          <div class="player-info">
+            <div class="rage-bar-container"><div class="rage-bar" id="p2-rage">RAGE ACTIVE</div></div>
+            <div class="name">KING</div>
+          </div>
+          <div class="health-bar-bg">
+            <div class="health-bar" id="p2-health" style="width: 100%;"></div>
+            <div class="health-bar-red-drain" id="p2-health-drain" style="width: 100%;"></div>
+          </div>
+          <div class="round-badges" id="p2-rounds">
+            <!-- Dynamic badges -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Center Fight Announcements (ROUND 1, FIGHT, KO) -->
+      <div class="announcement-overlay">
+        <h1 class="announcement-text" id="announcement">ROUND 1</h1>
+      </div>
+
+      <!-- Combo Counters -->
+      <div class="combo-container p1" id="p1-combo-ui">
+        <span class="combo-hits" id="p1-combo-count">3 HITS</span>
+        <span class="combo-title">COMBO!</span>
+      </div>
+      <div class="combo-container p2" id="p2-combo-ui">
+        <span class="combo-hits" id="p2-combo-count">2 HITS</span>
+        <span class="combo-title">COMBO!</span>
+      </div>
+
+      <!-- Controls Reminder during Training -->
+      <div id="training-info" class="training-info-panel">
+        <div><strong>TRAINING MODE ACTIVE</strong></div>
+        <div>P1: Move: A/D/W/S | Attack: J (Punch) / K (Kick) / U (Special) / I (Ultimate)</div>
+        <div>P2 (Dummy): Hold/Press Arrow keys or numpad inputs to control.</div>
+      </div>
+    </div>
+
+    <!-- Match Results Screen -->
+    <div id="match-results" class="screen">
+      <div class="results-content">
+        <h1 class="winner-text" id="winner-announcement">JIN KAZAMA WINS</h1>
+        <h2 class="sub-winner-text" id="results-details">PERFECT VICTORY!</h2>
+        
+        <div class="results-options">
+          <button class="menu-btn" id="rematch-btn">REMATCH</button>
+          <button class="menu-btn" id="char-select-btn">CHARACTER SELECT</button>
+          <button class="menu-btn" id="main-menu-btn">MAIN MENU</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
