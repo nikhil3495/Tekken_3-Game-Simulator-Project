@@ -56,42 +56,53 @@ Each character features unique balance stats, special visual indicators, and dis
 
 ---
 
-## 🚀 How to Install and Run
+## 🚀 How to Play
 
-Make sure you have [Node.js](https://nodejs.org/) installed.
+### 📥 Option A: Direct Download (Windows Portable - No Install Required)
+1. Download **[Tekken_3_Game.zip](https://github.com/nikhil3495/tekken-3-game/releases/download/v1.0.0/Tekken_3_Game.zip)** from the GitHub Releases.
+2. Extract the downloaded ZIP file to any folder on your computer.
+3. Open the extracted folder, find **`Tekken 3 Game.exe`**, and run it to play immediately!
 
-### Option A: Run as Desktop App (Recommended)
+---
+
+### 💻 Option B: Run from Source Code (For Developers)
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
+
 1. Clone the repository and navigate to the project folder:
    ```bash
    git clone https://github.com/nikhil3495/tekken-3-game.git
    cd tekken-3-game
    ```
-2. Install the required dependencies:
+2. Install dependencies:
    ```bash
    npm install
    ```
-3. Start the game in desktop mode:
+3. Launch the game in desktop mode:
    ```bash
    npm start
    ```
 
-### Option B: Run as Web App
-If you'd rather run the game via a local web server:
-1. Start the server using Node:
+---
+
+### 🌐 Option C: Run as a Web App
+You can run the game using the built-in HTTP server:
+1. Start the server:
    ```bash
    node server.js
    ```
-2. Open your web browser and navigate to:
+2. Open your browser and navigate to:
    ```
    http://localhost:8080
    ```
 
-### Option C: Build / Package Desktop Executable
-To package the game into a standalone `.exe` for Windows:
+---
+
+### 📦 Option D: Build and Package
+To build your own standalone `.exe` installer or package:
 ```bash
 npm run package
 ```
-The packaged application will build inside the `dist/` directory.
+The compiled build will be generated in the `dist/` directory.
 
 ---
 
